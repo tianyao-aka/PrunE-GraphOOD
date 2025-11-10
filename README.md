@@ -49,23 +49,21 @@ First graph OOD method that focuses on **removing spurious edges** rather than d
 
 ### 2. Two Lightweight Regularization Terms
 
-**Graph Size Constraint (ℒ_e)**:
-```
-ℒ_e = 𝔼_G [(Σ_{(i,j)∈E} Ã_ij / |E| - η)²]
-```
-Excludes uninformative spurious edges by limiting total edge weights to η|G|, where η ∈ {0.5, 0.75, 0.85}.
+**Graph Size Constraint** ($\mathcal{L}_e$):
 
-**ε-Probability Alignment (ℒ_s)**:
-```
-ℒ_s = 𝔼_G [1/|E_s| Σ_{e_ij∈E_s} |p_ij - ε|]
-```
-Suppresses spurious edge occurrence by aligning lowest K% edge probabilities to ε = 1/|E|.
+$$\mathcal{L}_e = \mathbb{E}_G \left[\left(\frac{\sum_{(i,j)\in E} \tilde{A}_{ij}}{|E|} - \eta\right)^2\right]$$
+
+Excludes uninformative spurious edges by limiting total edge weights to $\eta|G|$, where $\eta \in \{0.5, 0.75, 0.85\}$.
+
+**ε-Probability Alignment** ($\mathcal{L}_s$):
+
+$$\mathcal{L}_s = \mathbb{E}_G \left[\frac{1}{|\mathcal{E}_s|} \sum_{e_{ij}\in\mathcal{E}_s} |p_{ij} - \epsilon|\right]$$
+
+Suppresses spurious edge occurrence by aligning lowest $K\%$ edge probabilities to $\epsilon = \frac{1}{|E|}$.
 
 **Final Objective**:
-```
-ℒ = ℒ_GT + λ₁ℒ_e + λ₂ℒ_s
-```
 
+$$\mathcal{L} = \mathcal{L}_{GT} + \lambda_1\mathcal{L}_e + \lambda_2\mathcal{L}_s$$
 
 ---
 
